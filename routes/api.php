@@ -22,6 +22,8 @@ Route::group(['prefix' => 'v1'], function()
     Route::resource('items', 'ItemController', [
         'except' => []
     ]);
+
+    Route::resource('posts', 'PostController');
 });
 
 Route::post('users/register', 'UserController@create');
