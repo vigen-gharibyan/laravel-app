@@ -46,7 +46,7 @@ class PostController extends Controller
 
     public function destroy($id)
     {
-        Item::destroy($id);
+        Post::destroy($id);
 
         return response(null, Response::HTTP_OK);
     }

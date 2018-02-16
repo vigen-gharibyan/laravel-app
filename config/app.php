@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Jenssegers\Mongodb\MongodbServiceProvider::class,
+        Jenssegers\Mongodb\Validation\ValidationServiceProvider::class,
 
     ],
 
