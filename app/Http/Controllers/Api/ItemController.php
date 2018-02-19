@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 use App\Item;
 
 class ItemController extends Controller
@@ -12,14 +13,14 @@ class ItemController extends Controller
     {
         $items = Item::all();
 
-        return response($items->jsonSerialize(), Response::HTTP_OK);
+        return response()->json($items, Response::HTTP_OK);
     }
 
     public function show($id)
     {
         $item = Item::findOrFail($id);
 
-        return response($item->jsonSerialize(), Response::HTTP_OK);
+        return response()->json($item, Response::HTTP_OK);
     }
 
     public function store(Request $request)
@@ -30,7 +31,7 @@ class ItemController extends Controller
         ]);
         $item->save();
 
-        return response($item->jsonSerialize(), Response::HTTP_CREATED);
+        return response()->json($item, Response::HTTP_CREATED);
     }
 
     public function update(Request $request, $id)
@@ -41,14 +42,14 @@ class ItemController extends Controller
         $item->price = $request->get('price');
         $item->save();
 
-        return response(null, Response::HTTP_OK);
+        return response()->json($item, Response::HTTP_OK);
     }
 
     public function destroy($id)
     {
         Item::destroy($id);
 
-        return response(null, Response::HTTP_OK);
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 
 }
