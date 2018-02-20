@@ -14,7 +14,7 @@ class PostController extends Controller
         $this->middleware('jwt.auth', [
             'except' => [
                 'index',
-                'show',
+            //  'show',
             ]
         ]);
     }
@@ -23,14 +23,14 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
-        return response()->json($posts, Response::HTTP_OK);
+        return response()->api($posts, true, Response::HTTP_OK);
     }
 
     public function show($id)
     {
         $post = Post::find($id);
 
-        return response()->json($post, Response::HTTP_OK);
+        return response()->api($post, true, Response::HTTP_OK);
     }
 
     public function store(Request $request)
@@ -41,7 +41,7 @@ class PostController extends Controller
         ]);
         $post->save();
 
-        return response()->json($post, Response::HTTP_CREATED);
+        return response()->api($post, true, Response::HTTP_CREATED);
     }
 
     public function update(Request $request, $id)
@@ -54,14 +54,14 @@ class PostController extends Controller
             $post->save();
         }
 
-        return response()->json($post, Response::HTTP_OK);
+        return response()->api($post, true, Response::HTTP_OK);
     }
 
     public function destroy($id)
     {
         Post::destroy($id);
 
-        return response()->json(null, Response::HTTP_NO_CONTENT);
+        return response()->api(null, true /*, Response::HTTP_NO_CONTENT*/);
     }
 
 }

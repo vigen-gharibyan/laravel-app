@@ -72,7 +72,7 @@ trait RestExceptionHandlerTrait
     {
         $payload = $payload ?: [];
 
-        return response()->json($payload, $statusCode);
+        return response()->api($payload, false, $statusCode);
     }
 
     /**
