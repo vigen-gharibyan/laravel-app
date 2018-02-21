@@ -30,14 +30,6 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
         Route::group(['middleware' => 'jwt.auth'], function () {
             Route::get('user', 'UserController@getAuthUser');
         });
-
-        Route::get('user', 'UserController@getAuthUser');
     });
 });
 
-/*
-Route::post('users/register', 'UserController@create');
-Route::post('users/authenticate', 'UserController@authenticate');
-Route::put('users/update/{id}', 'UserController@update');
-Route::get('users/checkEmail/{email}', 'UserController@checkEmail');
-*/

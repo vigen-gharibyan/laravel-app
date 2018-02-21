@@ -180,6 +180,7 @@ return [
         Jenssegers\Mongodb\MongodbServiceProvider::class,
         Jenssegers\Mongodb\Validation\ValidationServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        App\Providers\ResponseServiceProvider::class,
 
     ],
 

@@ -23,29 +23,26 @@ class UserController extends Controller
 
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json([
-                    'response' => 'error',
-                    'message' => 'invalid_email_or_password',
-                ]);
+                return response()->api([
+                    'message' => 'Invalid email or password',
+                ], false);
             }
         } catch (JWTAuthException $e) {
-            return response()->json([
-                'response' => 'error',
-                'message' => 'failed_to_create_token',
-            ]);
+            return response()->api([
+                'message' => 'Failed to create token',
+            ], false);
         }
-        return response()->json([
-            'response' => 'success',
-            'result' => [
-                'token' => $token,
-            ],
-        ]);
+        return response()->api([
+            'token' => $token,
+        ], true);
     }
 
     public function getAuthUser(Request $request)
     {
         $user = JWTAuth::toUser($request->token);
-        return response()->json(['result' => $user]);
+        return response()->api([
+            'user' => $user
+        ], true);
     }
 
 }

@@ -13,14 +13,14 @@ class ItemController extends Controller
     {
         $items = Item::all();
 
-        return response()->json($items, Response::HTTP_OK);
+        return response()->api($items, true, Response::HTTP_OK);
     }
 
     public function show($id)
     {
         $item = Item::findOrFail($id);
 
-        return response()->json($item, Response::HTTP_OK);
+        return response()->api($item, true, Response::HTTP_OK);
     }
 
     public function store(Request $request)
@@ -31,7 +31,7 @@ class ItemController extends Controller
         ]);
         $item->save();
 
-        return response()->json($item, Response::HTTP_CREATED);
+        return response()->api($item, true, Response::HTTP_CREATED);
     }
 
     public function update(Request $request, $id)
@@ -42,14 +42,14 @@ class ItemController extends Controller
         $item->price = $request->get('price');
         $item->save();
 
-        return response()->json($item, Response::HTTP_OK);
+        return response()->api($item, true, Response::HTTP_OK);
     }
 
     public function destroy($id)
     {
         Item::destroy($id);
 
-        return response()->json(null, Response::HTTP_NO_CONTENT);
+        return response()->api(null, true, Response::HTTP_NO_CONTENT);
     }
 
 }
