@@ -26,6 +26,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
         ]);
         Route::resource('posts', 'PostController');
 
+        Route::post('signup', 'UserController@register');
         Route::post('auth/login', 'UserController@login');
         Route::group(['middleware' => 'jwt.auth'], function () {
             Route::get('user', 'UserController@getAuthUser');

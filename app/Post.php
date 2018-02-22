@@ -35,7 +35,7 @@ class Post extends Eloquent
         });
     }
 
-    /* Relations */
+    /***** Relations *****/
     function createdBy()
     {
         return $this->belongsTo('App\User', 'created_by');
