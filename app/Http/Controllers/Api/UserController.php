@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Http\Response;
 use JWTAuth;
 use JWTAuthException;
 use Illuminate\Auth\Events\Registered;
@@ -48,7 +49,19 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        event(new Registered($user = $this->create($request->all())));
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:mongodb.users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        if($validator->fails()) {
+            return response()->api($validator->errors(), true);
+        }
+
+        event(new Registered($user = $this->create($data)));
 
         return response()->api($user, true);
     }
