@@ -14,6 +14,12 @@ class User extends Authenticatable implements JWTSubject
     protected $collection = 'users';
 
     /**
+     * Roles
+     */
+    const ROLE_USER = 'user';
+    const ROLE_ADMIN = 'admin';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -62,6 +68,13 @@ class User extends Authenticatable implements JWTSubject
     public function getEmailAttribute($value)
     {
         return strtolower($value);
+    }
+
+    public static function create(array $attributes = [], $role_slag = self::ROLE_USER)
+    {
+        $model = static::query()->create($attributes);
+
+        return $model;
     }
 
     /***** Relations *****/
